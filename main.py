@@ -1,6 +1,9 @@
+import os
 import tkinter as tk
 from tkinter import filedialog, scrolledtext
 import pandas as pd
+
+import ctypes  # library to add an icon to the Windows 11 taskbar.
 
 # =======================
 # Model - Data and Logic
@@ -91,8 +94,13 @@ class ExcelSearchApp:
 
 # or
 
+# "def main()" with an icon for the app window and for the Windows 11 taskbar.
 def main():
+    myappid = "verbum.texttools.1"  # any unique string
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     root = tk.Tk()
+    icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "icon.ico")
+    root.iconbitmap(icon_path)
     app = ExcelSearchApp(root)
     root.mainloop()
 
